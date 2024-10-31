@@ -1,3 +1,6 @@
+from itertools import filterfalse
+
+
 class PigLatin:
 
     def __init__(self, phrase):
@@ -18,6 +21,12 @@ class PigLatin:
             else:
                 return self.phrase + "ay"
 
+        else:
+            j = 0
+            while j < len(self.phrase) and self.phrase[j].lower() not in the_vowel:
+                j += 1
+            if j == 1:
+                return self.phrase[1:] + self.phrase[0] + "ay"
 
     def PigLatinTranslator(phrase):
         return PigLatin(phrase)
