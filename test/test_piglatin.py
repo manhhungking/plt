@@ -1,4 +1,6 @@
 import unittest
+from idlelib.pyparse import trans
+
 from piglatin import PigLatin
 from error import PigLatinError
 
@@ -11,3 +13,8 @@ class TestPigLatin(unittest.TestCase):
         phrase = translator.get_phrase()
 
         self.assertEqual("hello world", phrase)
+
+    def test_translating_empty_phrase(self):
+        translator = PigLatin.PigLatinTranslator("")
+        translate = translator.translate()
+        self.assertEqual("nil", translate)
