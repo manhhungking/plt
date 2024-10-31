@@ -25,8 +25,7 @@ class PigLatin:
             j = 0
             while j < len(self.phrase) and self.phrase[j].lower() not in the_vowel:
                 j += 1
-            if j == 1:
-                return self.phrase[1:] + self.phrase[0] + "ay"
+            return self.phrase[j:] + self.phrase[0:j] + "ay"
 
     def PigLatinTranslator(phrase):
         return PigLatin(phrase)
