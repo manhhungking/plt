@@ -62,3 +62,17 @@ class TestPigLatin(unittest.TestCase):
     def test_translating_a_phrase_containing_punctuations_1(self):
         translator = PigLatin.PigLatinTranslator("hello world!@")
         self.assertRaises(PigLatinError, translator.translate)
+
+    def test_translating_a_phrase_with_upper_and_titlecase_words_0(self):
+        translator = PigLatin.PigLatinTranslator("APPLE")
+        translate = translator.translate()
+        self.assertEqual("APPLEYAY", translate)
+
+    def test_translating_a_phrase_with_upper_and_titlecase_words_1(self):
+        translator = PigLatin.PigLatinTranslator("Hello")
+        translate = translator.translate()
+        self.assertEqual("Ellohay", translate)
+
+    def test_translating_a_phrase_with_upper_and_titlecase_words_2(self):
+        translator = PigLatin.PigLatinTranslator("biRd")
+        self.assertRaises(PigLatinError, translator.translate)
