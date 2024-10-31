@@ -1,6 +1,5 @@
 from itertools import filterfalse
-
-
+import re
 class PigLatin:
 
     def __init__(self, phrase):
@@ -13,19 +12,32 @@ class PigLatin:
         if self.phrase == "":
             return "nil"
         the_vowel = ["a", "e", "i", "o", "u"]
-        if self.phrase.lower()[0] in the_vowel:
-            if self.phrase.lower()[-1] == "y":
-                return self.phrase + "nay"
-            elif self.phrase.lower()[-1] in the_vowel:
-                return self.phrase + "yay"
-            else:
-                return self.phrase + "ay"
 
-        else:
-            j = 0
-            while j < len(self.phrase) and self.phrase[j].lower() not in the_vowel:
-                j += 1
-            return self.phrase[j:] + self.phrase[0:j] + "ay"
+        words = re.split(r'(\s+|-)', self.phrase)
+        after_words = []
+        for word in words:
+            if word in  ["-", " "]:
+                after_words.append(word)
+                continue
+
+            if word.lower()[0] in the_vowel:
+                if word.lower()[-1] == "y":
+                    after_words.append(word + "nay")
+                elif word.lower()[-1] in the_vowel:
+                    after_words.append(word + "yay")
+                else:
+                    after_words.append(word + "ay")
+
+            else:
+                j = 0
+                while j < len(word) and word[j].lower() not in the_vowel:
+                    j += 1
+                after_words.append(word[j:] + word[0:j] + "ay")
+
+        final_word = ""
+        for i in after_words:
+            final_word = final_word + i
+        return final_word
 
     def PigLatinTranslator(phrase):
         return PigLatin(phrase)
